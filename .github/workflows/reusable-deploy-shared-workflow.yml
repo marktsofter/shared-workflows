@@ -15,14 +15,12 @@ on:
     secrets:
       azure-profile:
         required: false
- 
+
 jobs:
- 
   deploy_job:
     runs-on: windows-latest
-      
+
     steps:
-      
       - name: Download artifact from build job
         uses: actions/download-artifact@v4.1.8
         with:
@@ -32,11 +30,11 @@ jobs:
         run: echo "Workflow stored in shared-workflows repo"
 
       - name: Secret Information
-        run: echo "Value of secret matches - ${{ secrets.azure.profile  == 'Placeholder' }}"
+        run: echo "Value of secret matches - ${{ secrets.azure-profile  == 'Placeholder' }}"
 
       - name: Print name of App Service to deploy to
         run: echo "App will be deployed to ${{ inputs.app-name }}"
-      
+
       - name: List files in root directory
         run: |
           Get-ChildItem -Path . | ForEach-Object { Write-Output $_.Name }
